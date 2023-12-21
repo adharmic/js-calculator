@@ -41,6 +41,7 @@ function updateDisplay() {
 let firstValue, operator;
 let displayValue = "0";
 let equPressed = false;
+let prevOperator = "";
 
 const DIGIT_BUTTONS = document.querySelectorAll('.digits button');
 const DISPLAY = document.querySelector('.display');
@@ -53,14 +54,13 @@ for (let button of OPERATOR_BUTTONS) {
         if (!firstValue) {
             firstValue = Number(DISPLAY.textContent);
             displayValue = "";
-            return;
         }
-        if (displayValue !== "") {
-            displayValue = firstValue = operate(operator, firstValue, Number(DISPLAY.textContent));
+        else if (displayValue !== "") {
+            displayValue = firstValue = operate(prevOperator, firstValue, Number(DISPLAY.textContent));
             updateDisplay();
             displayValue = "";
-            return;
         }
+        prevOperator = operator;
     });
 }
 
