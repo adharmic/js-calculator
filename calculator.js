@@ -12,7 +12,7 @@ function multiply(multiplier, multiplicand) {
 }
 
 function divide(dividend, divisor) {
-    return divided / divisor;
+    return dividend / divisor;
 }
 
 function operate(operator, firstValue, secondValue) {
