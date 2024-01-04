@@ -42,8 +42,9 @@ let firstValue, operator;
 let displayValue = "0";
 let equPressed = false;
 let prevOperator = "";
+let deciPressed = false;
 
-const DIGIT_BUTTONS = document.querySelectorAll('.digits button');
+const DIGIT_BUTTONS = document.querySelectorAll('.digits .digit_button');
 const DISPLAY = document.querySelector('.display');
 const OPERATOR_BUTTONS = document.querySelectorAll('.operators');
 
@@ -69,6 +70,7 @@ const SUB = document.querySelector('#subtract');
 const MUL = document.querySelector('#multiply');
 const DIV = document.querySelector('#divide');
 const EQU = document.querySelector('#equals');
+const DEC = document.querySelector('#period');
 
 const CLEAR = document.querySelector('#clear');
 
@@ -91,6 +93,7 @@ DIV.addEventListener("click", e => {
 EQU.addEventListener("click", e => {
     if (displayValue !== "" && operator) {
         displayValue = operate(operator, firstValue, Number(displayValue));
+        DEC.disabled = false;
         updateDisplay();
         displayValue = "";
         firstValue = null;
@@ -104,6 +107,7 @@ CLEAR.addEventListener("click", e => {
     displayValue = "0";
     operator = null;
     equPressed = false;
+    DEC.disabled = false;
     updateDisplay();
 })
 
@@ -122,4 +126,21 @@ for (let button of DIGIT_BUTTONS) {
             updateDisplay();   
         }
     });
+}
+
+const ALL_BUTTONS = document.querySelectorAll('button');
+
+for (let button of ALL_BUTTONS) {
+    button.addEventListener("click", e => {
+        if (e.target.textContent != "=" && DISPLAY.textContent.includes('.')) {
+            DEC.disabled = true;
+        }
+        else {
+            DEC.disabled = false;
+        }
+        if (DISPLAY.textContent === ".") {
+            displayValue = "0.";
+            updateDisplay();
+        }
+    })
 }
