@@ -71,8 +71,19 @@ const MUL = document.querySelector('#multiply');
 const DIV = document.querySelector('#divide');
 const EQU = document.querySelector('#equals');
 const DEC = document.querySelector('#period');
+const DEL = document.querySelector('#backspace');
 
 const CLEAR = document.querySelector('#clear');
+
+DEL.addEventListener("click", e => {
+    if (displayValue <= 1) {
+        displayValue = "0";
+    }
+    else {
+        displayValue = displayValue.slice(0, DISPLAY.textContent.length - 1);
+    }
+    updateDisplay();
+});
 
 ADD.addEventListener("click", e => {
     operator = "+";
