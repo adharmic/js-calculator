@@ -35,7 +35,7 @@ function operate(operator, firstValue, secondValue) {
 }
 
 function updateDisplay() {
-    DISPLAY.textContent = displayValue;
+    DISPLAY.value = displayValue;
 }
 
 let firstValue, operator;
@@ -53,11 +53,11 @@ for (let button of OPERATOR_BUTTONS) {
     button.addEventListener("click", e => {
         equPressed = false;
         if (!firstValue) {
-            firstValue = Number(DISPLAY.textContent);
+            firstValue = Number(DISPLAY.value);
             displayValue = "";
         }
         else if (displayValue !== "") {
-            displayValue = firstValue = operate(prevOperator, firstValue, Number(DISPLAY.textContent));
+            displayValue = firstValue = operate(prevOperator, firstValue, Number(DISPLAY.value));
             updateDisplay();
             displayValue = "";
         }
@@ -80,7 +80,7 @@ DEL.addEventListener("click", e => {
         displayValue = "0";
     }
     else {
-        displayValue = displayValue.slice(0, DISPLAY.textContent.length - 1);
+        displayValue = displayValue.slice(0, DISPLAY.value.length - 1);
     }
     updateDisplay();
 });
@@ -130,7 +130,7 @@ for (let button of DIGIT_BUTTONS) {
             equPressed = false;
         }
         if (e.textContent !== "0") {
-            if (DISPLAY.textContent === "0") {
+            if (DISPLAY.value === "0") {
                 displayValue = "";
             }
             displayValue += e.target.textContent;
@@ -143,13 +143,13 @@ const ALL_BUTTONS = document.querySelectorAll('button');
 
 for (let button of ALL_BUTTONS) {
     button.addEventListener("click", e => {
-        if (e.target.textContent != "=" && DISPLAY.textContent.includes('.')) {
+        if (e.target.textContent != "=" && DISPLAY.value.includes('.')) {
             DEC.disabled = true;
         }
         else {
             DEC.disabled = false;
         }
-        if (DISPLAY.textContent === ".") {
+        if (DISPLAY.value === ".") {
             displayValue = "0.";
             updateDisplay();
         }
